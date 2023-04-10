@@ -1,0 +1,97 @@
+/* Navbar styles */
+.home-navbar {
+    background-color: #343a40;
+    height: 70px;
+    padding: 0 15px;
+}
+
+.home-navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+}
+
+.home-navbar li {
+    margin-right: 20px;
+}
+
+.home-navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.home-navbar a:hover {
+    color: #28a745;
+}
+
+/* Main container styles */
+.home-container {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    min-height: calc(100vh - 70px);
+}
+
+/* Title styles */
+.home-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+/* CTA styles */
+.home-cta {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.home-link {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.home-link:hover {
+    background-color: #218838;
+}
+
+/* About section styles */
+.home-about {
+    margin-bottom: 50px;
+}
+
+.home-about h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.home-about p {
+    font-size: 1.2rem;
+    text-align: justify;
+}
+
+/* Footer styles */
+.home-footer {
+    text-align: center;
+    margin-top: auto;
+    padding: 20px;
+    background-color: #343a40;
+    color: #fff;
+    font-size: 1.2rem;
+}
