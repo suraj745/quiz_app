@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Quiz from "./components/Quiz";
 import Result from "./components/Result";
+import Review from "./components/Review";
 import React, { useState } from "react";
 
 function App() {

@@ -1,6 +1,5 @@
 import React from "react";
 import "./Home.css"; // import the CSS file
-import "bootstrap/dist/css/bootstrap.min.css"; // import Bootstrap CSS
 
 function Home() {
   return (

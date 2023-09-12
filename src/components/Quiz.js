@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Quiz.css"; // Import the CSS file
+import Review from "./Review"; // Import the Review component
 
 const Quiz = ({ onFinish }) => {
   const [questions, setQuestions] = useState([]);
@@ -28,20 +29,22 @@ const Quiz = ({ onFinish }) => {
   };
 
   const handleSubmit = () => {
-    const score = selectedAnswerIndexes.reduce(
-      (totalScore, answerIndex, questionIndex) =>
-        totalScore +
-        (answerIndex === questions[questionIndex].correctAnswerIndex ? 1 : 0),
-      0
-    );
-
+    const score =
+      selectedAnswerIndexes.reduce(
+        (totalScore, answerIndex, questionIndex) =>
+          totalScore +
+          (answerIndex === questions[questionIndex].correctAnswerIndex ? 1 : 0),
+        0
+      ) +
+      "/" +
+      questions.length;
     setIsSubmitted(true);
     onFinish(score);
   };
 
   const isAnswerCorrect = (questionIndex, answerIndex) => {
     return (
-      isSubmitted || answerIndex === questions[questionIndex].correctAnswerIndex
+      isSubmitted && answerIndex === questions[questionIndex].correctAnswerIndex
     );
   };
 
@@ -53,52 +56,20 @@ const Quiz = ({ onFinish }) => {
     );
   };
 
+  const handleClose = () => {
+    setIsSubmitted(false);
+  };
+
   return (
     <div>
       {questions.length === 0 ? (
         <p>Loading questions...</p>
       ) : isSubmitted ? (
-        <div>
-          <h1>
-            Quiz Score:{" "}
-            {selectedAnswerIndexes.reduce(
-              (total, currentIndex, index) =>
-                currentIndex === questions[index].correctAnswerIndex
-                  ? total + 1
-                  : total,
-              0
-            )}
-            /{questions.length}
-          </h1>
-          <h2>Correct Answers:</h2>
-          {questions.map((question, index) => (
-            <div key={index}>
-              <p>
-                {`${index + 1}. `}
-                {question.answerChoices.map((choice, choiceIndex) => (
-                  <span
-                    key={choiceIndex}
-                    style={
-                      choiceIndex === question.correctAnswerIndex
-                        ? {
-                            color: "green",
-                            fontWeight: "bold",
-                            marginRight: "10px",
-                          }
-                        : {}
-                    }
-                  >
-                    {choice}
-                    {selectedAnswerIndexes[index] === choiceIndex ? (
-                      <strong> (your answer)</strong>
-                    ) : null}
-                  </span>
-                ))}
-              </p>
-            </div>
-          ))}
-          <button onClick={() => window.location.reload()}>Retake Quiz</button>
-        </div>
+        <Review
+          questions={questions}
+          selectedAnswerIndexes={selectedAnswerIndexes}
+          onClose={handleClose}
+        />
       ) : (
         <div>
           {questions.map((question, index) => (
@@ -123,53 +94,17 @@ const Quiz = ({ onFinish }) => {
                       value={answerIndex}
                       checked={selectedAnswerIndexes[index] === answerIndex}
                       onChange={() => handleAnswerChange(index, answerIndex)}
-                      disabled={isSubmitted}
                     />
                     <label htmlFor={`answer-${index}-${answerIndex}`}>
                       {answer}
                     </label>
-                    {isSubmitted && (
-                      <span
-                        className={`answer-status ${
-                          isAnswerCorrect(index, answerIndex)
-                            ? "correct"
-                            : "wrong"
-                        }`}
-                        style={
-                          isAnswerCorrect(index, answerIndex)
-                            ? { color: "green", fontWeight: "bold" }
-                            : {}
-                        }
-                      >
-                        {isAnswerCorrect(index, answerIndex)
-                          ? "Correct"
-                          : "Incorrect"}
-                      </span>
-                    )}
                   </li>
                 ))}
-                {isSubmitted && (
-                  <div>
-                    <p>
-                      Correct answer:{" "}
-                      <span style={{ color: "green", fontWeight: "bold" }}>
-                        {question.answerChoices[question.correctAnswerIndex]}
-                      </span>
-                    </p>
-                    <p>
-                      Your answer:{" "}
-                      <span style={{ fontWeight: "bold" }}>
-                        {question.answerChoices[selectedAnswerIndexes[index]]}
-                      </span>
-                    </p>
-                  </div>
-                )}
               </ul>
             </div>
           ))}
           <button className="submit-button" onClick={handleSubmit}>
-            {" "}
-            Submit{" "}
+            Submit
           </button>
         </div>
       )}
