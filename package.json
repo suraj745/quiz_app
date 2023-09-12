@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:frontend": "react-scripts start",
-    "start:backend": "node ../server/server.js"
+    "start:backend": "node ./server/server.js"
   },
   "eslintConfig": {
     "extends": [
