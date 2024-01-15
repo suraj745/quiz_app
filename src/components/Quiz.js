@@ -9,9 +9,10 @@ const Quiz = ({ onFinish }) => {
     new Array(10).fill(-1)
   );
   const [isSubmitted, setIsSubmitted] = useState(false);
+  console.log(`frontUrl ${process.env.REACT_APP_URL}questions`);
 
   useEffect(() => {
-    axios.get(`${process.env.URL}questions`).then((res) => {
+    axios.get(`${process.env.REACT_APP_URL}questions`).then((res) => {
       const questions = res.data;
       const randomQuestions = questions
         .sort(() => Math.random() - 0.5)

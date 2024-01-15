@@ -9,7 +9,10 @@ app.use(cors());
 const dbURI = process.env.MONGODB_URL;
 
 mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(
+    "mongodb+srv://kapilwankhede2204:0GufORnJeKAvtG8A@quizz.dsnaknj.mongodb.net/quizz",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
   .then(() => {
     console.log("Connected to MongoDB");
   })
